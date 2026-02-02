@@ -55,9 +55,10 @@ type: Pet = Literal['cat', 'dog']
 **Syntax:**
 
 ```text
-signature: Funktionsname: (Typen) -> Rü```
+signature: Funktionsname: (Typen) -> Rückgabetyp
+```
 
-**Beschreibung:**\
+**Beschreibung:**  
 Definiert die Signatur der Hauptfunktion (Name, Parametertypen und Rückgabetyp).
 
 **Beispiel:**
