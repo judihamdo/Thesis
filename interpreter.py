@@ -543,7 +543,6 @@ class Interpreter:
 
         target_scope = hole.scope if isinstance(hole.scope, Scope) else self.global_scope
         collect_variables(filler, target_scope)
-        print("Those are there", self.get_selected_hole().scope.copy_all())
         #Typ-check und Holes aufräumen
         type_check(self.program)
         self.hole_cleaner.clean_holes(self.program)

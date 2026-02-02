@@ -187,10 +187,6 @@ def statement_to_str(statement: Statement | Hole, program, indent_level: int = 0
             raise UnexpectedValueError(statement)
 
 def program_to_str(program: Program) -> str:
-    #print(program.defined_types)
-    print(program.variables)
-    for pi, pa in program.defined_types.items():
-        print(pi, pa)
     return statement_to_str(program.statement, program)
 
 
