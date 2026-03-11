@@ -1,0 +1,64 @@
+description: example which demonstrates how to use list type, and use destruct on it
+
+signature: example4: (float, int, list[int])->float
+
+intro: x
+
+intro: y
+
+intro: xs
+
+comment: Example of filling this variable of type tuple with existing tuple
+
+let: my_list1: list[int]
+
+fill: xs
+
+comment: Another example of filling this variable of type tuple with a new tuple
+
+let: my_list2: list[float]
+
+new: list[float]
+
+cons:
+
+switch: 0
+
+fill: x
+
+cons:
+
+switch: 0
+
+fill: y
+
+nil:
+
+comment: After the following destruct command ,the program will not go to the end even when we filled all return holes because the list can be simply empty!
+
+destruct: my_list1
+
+intro: x1
+
+destruct: x1 > 1
+
+comment: it is not allowed to fill return hole with something like my_list1 because we have no information about its length
+
+return:
+
+fill: my_list2[0] + x
+
+comment: it is not allowed to fill return_hole with my_list2[2], because it has just 2 elements 
+
+return:
+
+fill: my_list2[0] + x
+
+comment: it is not allowed to f 
+
+return: 
+
+fill: my_list2[1] + y
+
+finish:
+

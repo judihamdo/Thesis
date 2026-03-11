@@ -1,0 +1,76 @@
+description: .. Hier brauchen wir for r in blabla zu reparieren damit er gut funktioniert
+
+type: River = Creek | Confluence
+
+data: Creek(origin:str)
+
+data: Confluence(left:River, right:River)
+
+signature: flows_from: (str, River) -> bool
+
+intro: location
+
+intro: river
+
+let: worklist: list[River]
+
+new: list[River]
+
+cons:
+
+switch: 0
+
+fill: river
+
+nil:
+
+destruct: river
+
+destruct: workist
+
+intro: r
+
+destruct: r
+
+intro: origin
+
+destruct: origin == location
+
+return:
+
+fill: True
+
+return:
+
+fill: False
+
+intro: right
+
+intro: left
+
+let: worklist1: list[River]
+
+new: list[River]
+
+cons:
+
+switch: 0
+
+fill: left
+
+cons:
+
+switch: 0
+
+fill: right
+
+nil:
+
+pass:
+
+return:
+
+fill: False
+
+finish:
+

@@ -1,4 +1,4 @@
-description: Example of MixedType, It takes different types of Animals and gives back True only if the Animal is cat. It also shows that all rest holes will be automatically closed because all return paths have been closed.
+description: Example of simple MixedType implementation, how to initialize, use it and make destruct on it
 
 data: Predator(name: str, deceitful: bool)
 
@@ -15,6 +15,8 @@ intro: a
 intro: predator1
 
 intro: p
+
+comment: initialize a new predator
 
 let: predator2: Predator
 
@@ -40,15 +42,21 @@ fill: False
 
 intro: name1
 
-intro: adjective1
+intro: deceitful
+
+return:
+
+fill: deceitful
 
 return:
 
 fill: False
 
-return:
+intro: some_animal
 
-fill: False
+let: zz: str
+
+fill: some_animal
 
 return:
 

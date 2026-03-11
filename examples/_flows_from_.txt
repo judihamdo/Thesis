@@ -1,0 +1,75 @@
+description: ..
+
+type: River = Creek | Confluence 
+
+data: Creek(origin: str)
+
+data: Confluence(location: str, main_stem: River, tributary: River)
+
+signature: flows_from: (str, River) -> bool
+
+intro: location
+
+intro: river
+
+let: to_visit: list[River]
+
+new: list[River]
+
+cons: 
+
+switch: 0
+
+fill: river
+
+nil:
+
+destruct: to_visit 
+
+intro: current
+
+destruct: current
+
+intro: loc1
+
+destruct: loc1 == location
+
+return:
+
+fill: True
+
+let: redundant1 : str
+
+fill: location
+
+pass:
+
+pass:
+
+intro: loc2
+
+intro: main_stem2
+
+intro: tributary2
+
+destruct: loc2 == location
+
+return:
+
+fill: True
+
+let: redundant2 : str
+
+fill: location
+
+pass:
+
+pass:
+
+pass:
+
+return:
+
+fill: False
+
+finish:

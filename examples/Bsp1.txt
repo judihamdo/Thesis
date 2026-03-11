@@ -1,0 +1,56 @@
+description: A program to show right variable assignment in semantics, type, order, complexe expressions
+
+comment: haetten wir irgendwelchen Type der nicht zu unseren efined types gehört, würden wir sofort falsche symantik in signature bekommen 
+
+signature: right_assignment: (int, str, ()->int, (float)->float) -> float
+
+intro: x
+
+intro: s
+
+intro: g
+
+intro: f
+
+comment: sematic errors like g()) would not work
+
+comment: my_float1 = g will not work, because g is of type function
+
+comment: if have filled my_float1 with function of return_type integer instead, it is ok, backwardly is not allowed
+
+let: my_float1 : float
+
+fill: g()
+
+comment: filling my_float2 with f(x) would also work
+
+let: my_float2 : float
+
+fill: f(f(x))
+
+comment: try to fill my_integer with f(x) instead it will not work
+
+comment: if we switched to a new statement hole, initialized a new variable d filled it and then switched to my_integer and tried to fill it with d it will not work, exactly like in real python programs happens, because it comes after it in order
+
+let: my_integer: int
+
+switch: 1
+
+let: d: int
+
+fill: x
+
+switch: 0
+
+fill: x + g ()
+
+comment: return a right typed complex expression
+
+return:
+
+fill: d * x * f(x)*f(g()) + my_integer - my_float1 / my_float2
+
+finish: 
+
+
+

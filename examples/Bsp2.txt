@@ -1,0 +1,57 @@
+description: example that demonstrates if-else which comes from using destruct with a boolean expression, pass command, nested_if_else
+
+comment: At the end all cases will be covered, we are not allowed to give any command other than finish 
+
+signature: example2: (int, bool) -> bool
+
+intro: x
+
+intro: b
+
+comment: in the part x > 1 case at the end we did not need return because all followed subcases had return
+
+destruct: x > 1
+
+let: x1: int
+
+fill: x
+
+destruct: x1 > x
+
+return: 
+
+fill: True
+
+return:
+
+fill: False
+
+destruct: b
+
+comment: it is not allowed to write n1 = x1 because x1 is in a different scope
+
+let: n1: int
+
+fill: x
+
+comment: pass command is used here because, we did not want to write return command
+
+pass:
+
+comment: it is not allowed to write n2 = n1 because n is in a different scope
+
+let: n2: int
+
+fill: x
+
+comment: pass command is used here because, we did not want to write return command
+
+pass:
+
+return: 
+
+fill: False
+
+finish:
+
+

@@ -1,0 +1,60 @@
+description: A function which Chooses and returns a Computer preset based on k ("cheap"/"professional"/"gamer").
+
+data: Computer(processor: str, ram: int, hard_drive: int)
+
+signature: standard_computer: (str) -> Computer
+
+intro: k
+
+destruct: k == 'cheap'
+
+return:
+
+new: Computer
+
+fill: "Sempron"
+
+fill: 2
+
+fill: 500
+
+destruct: k == 'professional'
+
+return:
+
+new: Computer
+
+fill: "Xeon"
+
+fill: 4
+
+fill: 1000
+
+destruct: k == 'gamer'
+
+return:
+
+new: Computer
+
+fill: "Quad"
+
+fill: 4
+
+fill: 750
+
+return:
+
+new: Computer
+
+fill: "None"
+
+fill: 0
+
+fill: 0
+
+finish:
+
+
+
+
+

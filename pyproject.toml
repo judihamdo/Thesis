@@ -1,0 +1,29 @@
+[project]
+name = "tactic_interpreter"
+version = "1.0.0"
+description = "A Python library for a tactic-based programming interpreter."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "Leonardo Mieschendahl" }, 
+  { name = "Judi Hamdo" }
+]
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+exclude = ["build*", "dist*", "dev*"]
+
+[tool.ruff]
+line-length = 150
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

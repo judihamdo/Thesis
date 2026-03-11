@@ -1,0 +1,39 @@
+description: example of LiteralType, destruct on it , also nested cases
+
+type: Predator= Literal['Tiger', 'Lion']
+
+type: Pet= Literal['cat', 'dog']
+
+signature: relative_animals: (Predator, Pet)->bool
+
+intro: predator1
+
+intro: pet1
+
+let: pre1: Predator
+
+fill: predator1
+
+let: pe1: Pet
+
+fill: pet1
+
+comment: All paths' return holes in this match will be filled, so after that we will reach automatically the end of the program
+
+destruct: predator1
+
+destruct: pet1
+
+return:
+
+fill: True
+
+return:
+
+fill: False
+
+return:
+
+fill: False
+
+finish:

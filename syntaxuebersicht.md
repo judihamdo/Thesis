@@ -1,14 +1,16 @@
-# Taktische Sprache – Syntaxübersicht
+# Taktische Sprache -- Syntaxübersicht
 
-Diese Datei dokumentiert die aktuelle Syntax der unterstützten Taktiken in der **interaktiven taktischen Sprache**. Ziel dieser Sprache ist es, Programme schrittweise, strukturiert und korrekt zu konstruieren.
+Diese Datei dokumentiert die aktuelle Syntax der unterstützten Taktiken
+in der **interaktiven taktischen Sprache**. Ziel dieser Sprache ist es,
+Programme schrittweise, strukturiert und korrekt zu konstruieren.
 
----
+------------------------------------------------------------------------
 
 ## description
 
 **Syntax:**
 
-```text
+``` text
 description: # passende_Beschreibung
 ```
 
@@ -17,85 +19,91 @@ Fügt eine textuelle Beschreibung zum Programm hinzu.
 
 **Beispiel:**
 
-```text
+``` text
 description: # A simple program
 ```
 
----
+------------------------------------------------------------------------
 
 ## type
 
 **Syntax:**
 
-```text
+``` text
 type: LiteralName = Literal[LiteralElement, ...]
 
-type: NameDesMixedTypes = PrimitiveType | LiteralType | RecordType | MixedType
+type: NameDesMixedTypes = PrimitiveType | LiteralType | RecordType | MixedType | ListType | TupleType
 ```
 
 **Beschreibung:**\
 Definiert einen neuen Typ. Unterstützt werden:
 
-- **LiteralType** (endliche Menge von Konstanten),
-- **MixedType** (Vereinigung mehrerer Typen),
-- Aliase auf bestehende primitive oder benutzerdefinierte Typen.
+-   **LiteralType** (endliche Menge von Konstanten),
+-   **MixedType** (Vereinigung mehrerer Typen),
+-   Aliase auf bestehende primitive oder benutzerdefinierte Typen,
+-   **ListType**,
+-   **TupleType**.
 
 Der Typ wird ohne ein separates Schlüsselwort verwendet.
 
 **Beispiel:**
 
-```text
+``` text
 type: Pet = Literal['cat', 'dog']
 ```
 
----
+------------------------------------------------------------------------
 
 ## signature
 
 **Syntax:**
 
-```text
+``` text
 signature: Funktionsname: (Typen) -> Rückgabetyp
 ```
 
-**Beschreibung:**  
-Definiert die Signatur der Hauptfunktion (Name, Parametertypen und Rückgabetyp).
+**Beschreibung:**\
+Definiert die Signatur der Hauptfunktion (Name, Parametertypen und
+Rückgabetyp).
 
 **Beispiel:**
 
-```text
+``` text
 signature: main: (int) -> int
 ```
 
----
+------------------------------------------------------------------------
 
 ## intro
 
 **Syntax:**
 
-```text
+``` text
 intro: Variablenname
 ```
 
 **Beschreibung:**\
 Führt einen neuen Namen ein:
 
-- für einen Funktionsparameter (wenn das Name-Loch aus `signature` stammt), oder
-- für eine Pattern-Variable (wenn das Loch in einem `data`- oder `destruct`-Konstrukt vorkommt).
+-   für einen Funktionsparameter (wenn das Name-Loch aus `signature`
+    stammt), oder
+-   für eine Pattern-Variable (wenn das Loch in einem `data`- oder
+    `destruct`-Konstrukt vorkommt), oder
+-   für eine Schleifenvariable (z. B. bei List- oder Range-Destruct).
 
 **Beispiel:**
 
-```text
+``` text
 intro: x
 ```
 
----
+------------------------------------------------------------------------
 
 ## let
 
 **Syntax:**
 
-```text
+``` text
 let: Variablenname: Variablentyp
 ```
 
@@ -104,36 +112,37 @@ Deklariert eine neue Variable im aktuellen Scope.
 
 **Beispiel:**
 
-```text
+``` text
 let: a: int
 ```
 
----
+------------------------------------------------------------------------
 
 ## fill
 
 **Syntax:**
 
-```text
+``` text
 fill: Ausdruck_mit_passendem_Typ
 ```
 
 **Beschreibung:**\
-Füllt ein Ausdrucks-Loch mit einem Ausdruck, dessen Typ zum erwarteten Typ des Lochs passt.
+Füllt ein Ausdrucks-Loch mit einem Ausdruck, dessen Typ zum erwarteten
+Typ des Lochs passt.
 
 **Beispiel:**
 
-```text
+``` text
 fill: 3
 ```
 
----
+------------------------------------------------------------------------
 
 ## switch
 
 **Syntax:**
 
-```text
+``` text
 switch: <HoleIndex>
 ```
 
@@ -142,123 +151,175 @@ Wechselt zu einem anderen offenen Loch im Programm.
 
 **Beispiel:**
 
-```text
+``` text
 switch: 1
 ```
 
----
+------------------------------------------------------------------------
 
 ## data
 
 **Syntax:**
 
-```text
+``` text
 data: Klassenname(Feld1Name:Feld1Typ, ..., FeldNName:FeldNTyp)
 ```
 
 **Beschreibung:**\
-Definiert einen neuen **Record-Typ** (strukturierter Datentyp mit benannten Feldern).
+Definiert einen neuen **Record-Typ** (strukturierter Datentyp mit
+benannten Feldern).
 
 **Beispiel:**
 
-```text
+``` text
 data: Computer(ram: int, processor: int)
 ```
 
----
+------------------------------------------------------------------------
 
 ## destruct
 
 **Syntax:**
 
-```text
+``` text
 destruct: Ausdruck
 ```
 
 Der Ausdruck muss einen der folgenden Typen haben:
 
-- `BoolType`
-- `LiteralType`
-- `RecordType`
-- `MixedType`
+-   `BoolType`
+-   `LiteralType`
+-   `RecordType`
+-   `MixedType`
+-   `TupleType`
+-   `ListType`
+-   `RangeType`
 
 **Beschreibung:**\
 Zerlegt einen Ausdruck abhängig von seinem Typ:
 
-- `bool` → `if-then-else`
-- `LiteralType` → `match-case`
-- `RecordType` → `match-case`
-- `MixedType` → `match-case`
+-   `bool` → `if-else`
+-   `LiteralType` → `match-case`
+-   `RecordType` → `match-case`
+-   `MixedType` → `match-case`
+-   `ListType` → `for-Schleife`
+-   `RangeType` → `for-Schleife`
+-   `TupleType` → Struktur-Destruct / Pattern-Zerlegung
 
 **Beispiel:**
 
-```text
+``` text
 destruct: x > 1
 ```
 
----
+------------------------------------------------------------------------
 
 ## return
 
 **Syntax:**
 
-```text
+``` text
 return:
 ```
 
 **Beschreibung:**\
-Fügt eine Return-Anweisung ein. Der eigentliche Rückgabewert wird anschließend mit `fill` gesetzt.
+Fügt eine Return-Anweisung ein. Der eigentliche Rückgabewert wird
+anschließend mit `fill` gesetzt.
 
 **Beispiel:**
 
-```text
+``` text
 return:
 ```
 
----
+------------------------------------------------------------------------
 
 ## pass
 
 **Syntax:**
 
-```text
+``` text
 pass:
 ```
 
 **Beschreibung:**\
-Beendet einen Zweig innerhalb eines `destruct`-Konstrukts ohne weitere Anweisungen.
+Beendet einen Zweig innerhalb eines `destruct`-Konstrukts ohne weitere
+Anweisungen.
 
 `pass` kann verwendet werden, wenn **kein `return` erforderlich ist**.\
-Ähnlich wie in Python, wenn ein `if`-, `else`- oder `case`-Zweig nur Variablendeklarationen enthält oder keinen weiteren Code benötigt.
+Ähnlich wie in Python, wenn ein `if`-, `else`- oder `case`-Zweig nur
+Variablendeklarationen enthält oder keinen weiteren Code benötigt.
 
 `pass` ist **nicht erlaubt**, wenn:
 
-- an dieser Stelle noch Anweisungen notwendig sind, oder
-- dadurch ein sinnvoller `if`-, `else`- oder `case`-Zweig leer bleiben würde.
+-   an dieser Stelle noch Anweisungen notwendig sind, oder
+-   dadurch ein sinnvoller `if`-, `else`- oder `case`-Zweig leer bleiben
+    würde.
 
-### Beispiel:
+------------------------------------------------------------------------
 
-```text
-def random_function(x: int) -> float:
-    n: int = x * 100
-    if (x > 1):
-        f = 0.1
-    else:
-        if (x < -100):
-            return n + 100
-        else:
-            f2 = 0.0
-        [0*]
-    [1]
+## nil
+
+**Syntax:**
+
+``` text
+nil:
 ```
 
-**Optionen für Loch 0:** `pass`, `destruct`, `return`, `let`
+**Beschreibung:**\
+Schließt ein Listenloch. Nur auf Listenlöchern erlaubt.
 
-In diesem Beispiel kann im inneren `else`-Zweig selbst entschieden werden, ob das Loch mit weiterem Code gefüllt oder mit `pass` beendet wird.
+**Beispiel:**
 
-Falls **alle möglichen Ausführungspfade bereits sicher mit einem `return` enden**, werden entsprechende Löcher automatisch erkannt und geschlossen; `pass` ist dann nicht mehr möglich.
+``` text
+lt1: list[int] = [15, [**]]
 
----
+nil:
+
+lt1: list[int] = [15]
+```
+
+------------------------------------------------------------------------
+
+## cons
+
+**Syntax:**
+
+``` text
+cons:
+```
+
+**Beschreibung:**\
+Erzeugt ein neues Element-Loch in einer Liste. Nur auf Listenlöchern
+erlaubt.
+
+**Beispiel:**
+
+``` text
+lt1: list[int] = [[**]]
+
+cons:
+
+lt1: list[int] = [[0] [**]]
+```
+
+------------------------------------------------------------------------
+
+## new
+
+**Beschreibung:**\
+Mit new kann man neue Listen, neue Tuple oder neue Instanzen von
+RecordType erstellen.\
+Je nach Typ entsteht ein spezielles Loch (z. B. Listenloch bei
+list\[T\]).
+
+**Beispiel:**
+
+``` text
+new: list[int]
+```
+
+------------------------------------------------------------------------
 
 ## finish
 
@@ -267,7 +328,6 @@ Beendet das Programm, wenn alle Löcher geschlossen sind.
 
 **Beispiel:**
 
-```text
+``` text
 finish:
 ```
-

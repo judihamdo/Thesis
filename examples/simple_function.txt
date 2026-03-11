@@ -1,0 +1,36 @@
+description: A simple example
+
+signature: simple_example: (int, (int)->int) -> bool
+
+intro: x
+
+intro: f
+
+destruct: f(x) > 1
+
+let: s: str
+
+fill: x
+
+switch: 1
+
+return:
+
+fill: True
+
+let: new_string: str
+
+fill: s
+
+fill: 'bravo, this string did not accept s assignment, because s must not be visible in this scope'
+
+return:
+
+fill: False
+
+fill: "some random variable!"
+
+finish:
+
+
+
