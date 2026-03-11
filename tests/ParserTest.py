@@ -1,6 +1,5 @@
 import pytest
 
-# passe den Modulnamen ggf. an:
 from src.tactics_lang.parser import (
     TokenStream,
     lex_type,

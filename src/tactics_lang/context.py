@@ -38,7 +38,7 @@ def check_ctx_equal(ctx1: TCtx, ctx2: TCtx, es: Expression | Statement, program)
 
 # ********************************************************************************************
 def ctx_from_program(program: Program, len_ctx: dict[str, int | None] | None = None) -> dict[str, Type]:
-    # Builds a type context from a Program object
+    """ Builds a type context from a Program object"""
     ctx: dict[str, Type] = {}
 
     def collect(node: Any):

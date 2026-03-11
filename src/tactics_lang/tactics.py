@@ -465,9 +465,6 @@ def _tactic_new(interpreter, data: str) -> None:
 
         # When we have ETuple
         interpreter.fill_selected_hole(ETuple(el_holes))
-
-        # If you did NOT introduce ETuple and want to print the tuple as an InjectedExpression,
-        # let me know briefly, and I will provide you with the alternative version.
         print_program(interpreter, "Added tuple expression")
         return
 

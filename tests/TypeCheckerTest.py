@@ -1,16 +1,3 @@
-# tests/test_type_checker.py
-# Pytest-Tests für dein type_checker.py
-#
-# Ausführen:
-#   pip install pytest
-#   pytest -q
-#
-# WICHTIG: Passe ggf. die Import-Pfade an (je nachdem wie deine Dateien heißen/liegen).
-# Ich gehe davon aus:
-#   - type_checker.py liegt im Projektroot (oder ist importierbar)
-#   - program.py definiert AST-Klassen (Program, EVar, EConst, EList, ESlice, EIndex, EOp1, EOp2, EIf, ETuple, ...)
-#   - utility.py enthält TypeCheckerError
-#
 import pytest
 
 from src.tactics_lang.context import ctx_from_program
@@ -66,8 +53,7 @@ def mk_program(stmt=None) -> Program:
     """Create a minimal Program instance that our type checker functions accept."""
     if stmt is None:
         stmt = SExpr(EConst(0))
-    p = Program(stmt)  # bei dir: Program(statement=...)
-    # sicherstellen, dass benötigte Felder existieren
+    p = Program(stmt)
     if not hasattr(p, "defined_types"):
         p.defined_types = {}
     if not hasattr(p, "list_lengths"):
@@ -86,7 +72,7 @@ def ctx(**kwargs):
 
 
 # ---------------------------
-# does_*_always_return
+# does_..._always_return
 # ---------------------------
 def test_does_stmt_always_return_return_stmt_true():
     s = ReturnStatement(EConst(1))

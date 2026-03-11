@@ -8,7 +8,6 @@ from src.tactics_lang.interpreter import Interpreter
 from src.tactics_lang.repl import interpret_file
 from src.tactics_lang.utility import TacticError, TerminationException
 
-# Passe das an, falls deine Beispiele woanders liegen:
 EXAMPLES_DIR = Path(__file__).resolve().parent.parent / "examples"
 
 
@@ -24,7 +23,6 @@ def _run_example(path: Path) -> None:
     try:
         interpret_file(itp, path)
     except TerminationException:
-        # Das ist dein normaler "finish"-Stop -> zählt als Erfolg
         return
 
 
@@ -36,7 +34,7 @@ def _collect_examples() -> list[Path]:
 
 @pytest.mark.parametrize("example_path", _collect_examples())
 def test_examples_end_to_end(example_path: Path):
-    # Wenn keine Beispiele existieren: Test nicht als "fail" werten
+    # When no examples avilable: do not evaluate Test as "fail"
     if not example_path.exists():
         pytest.skip(f"Example not found: {example_path}")
 
@@ -44,5 +42,4 @@ def test_examples_end_to_end(example_path: Path):
         with pytest.raises((TacticError, TypeError)):
             _run_example(example_path)
     else:
-        # Erfolgsfall: darf NICHT crashen
         _run_example(example_path)
