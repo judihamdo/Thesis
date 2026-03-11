@@ -1,0 +1,65 @@
+description: Example of simple MixedType implementation, how to initialize, use it and make destruct on it
+
+data: Predator(name: str, deceitful: bool)
+
+data: prey()
+
+type: Pet=Literal['cat', 'dog']
+
+type: Animal = Pet| Predator| prey| str
+
+signature: main: (Animal, Predator, Pet) -> bool
+
+intro: a
+
+intro: predator1
+
+intro: p
+
+comment: initialize a new predator
+
+let: predator2: Predator
+
+new: Predator
+
+fill: 'Lion'
+
+fill: False
+
+let: random_animal: Animal
+
+fill: p
+
+destruct: a
+
+return:
+
+fill: True
+
+return:
+
+fill: False
+
+intro: name1
+
+intro: deceitful
+
+return:
+
+fill: deceitful
+
+return:
+
+fill: False
+
+intro: some_animal
+
+let: zz: str
+
+fill: some_animal
+
+return:
+
+fill: False
+
+finish:

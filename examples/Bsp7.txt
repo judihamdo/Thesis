@@ -1,0 +1,71 @@
+description: complicated MixedType example, where we use variables of datatype before we even initialize them
+
+type: River = Riv1|Riv2
+
+type: Sea = sea1|sea2
+
+comment: Euphrates, Nile
+
+data: Riv1(name: str, origin: River)
+
+data: Riv2(name: str, origin: River)
+
+type: sea1 = Literal['red_sea']
+
+type: sea2 = Literal['Mediterranian']
+
+type: Water_source = River | Sea
+
+signature: main: (River, Riv1, Riv2, Sea)-> Water_source
+
+intro: R
+
+intro: r1
+
+intro: r2
+
+intro: s
+
+destruct: R
+
+intro: Nile
+
+intro: rr2
+
+let: random_river: Riv2
+
+new: Riv2
+
+fill: 'Euphrates'
+
+fill: R
+
+return: 
+
+fill: random_river
+
+intro: Dreisam
+
+intro: rr1
+
+comment: I can fill return_hole with any thing of type water_source
+
+let: z: Riv1
+
+new: Riv1
+
+fill: 'even'
+
+fill: R
+
+return:
+
+new: Riv1
+
+fill: 'rt'
+
+fill: Riv1
+
+fill: r1
+
+finish:

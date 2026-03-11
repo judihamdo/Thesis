@@ -1,0 +1,27 @@
+description: A function which takes a list of different animals (Dillo or Parrot) and returns the weight of a chosen one.
+
+type: Animal = Parrot | Dillo
+
+data: Parrot(weight: int)
+
+data: Dillo(weight: int)
+
+signature: animal_wight:(Animal)->int
+
+intro: a
+
+destruct: a
+
+intro: parrot_weight
+
+return:
+
+fill: parrot_weight
+
+intro: dillo_weight
+
+return:
+
+fill: dillo_weight
+
+finish:

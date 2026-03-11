@@ -1,0 +1,67 @@
+description: A complex example of nested lists, indexing and slicing
+
+signature: example5: (int,int,list[int], list[list[int]])->list[int]
+
+intro: x
+
+intro: s
+
+intro: lt 
+
+intro:lt_lt
+
+let: lt3: list[list[int]]
+
+new: list[list[int]]
+
+cons:
+
+switch: 0
+
+fill: lt
+
+nil:
+
+let: lt1: list[int]
+
+new: list[int]
+
+cons:
+
+switch: 0
+
+fill: s
+
+nil:
+
+destruct: lt
+
+intro: n
+
+let: n: int
+
+fill: n + 1
+
+destruct: n > 1
+
+return: 
+
+fill:lt
+
+return:
+
+fill: lt
+
+return:
+
+new: list[int]
+
+cons:
+
+switch: 0
+
+fill: s
+
+nil:
+
+finish:

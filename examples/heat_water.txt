@@ -1,0 +1,55 @@
+description: # This function calculates the resulting temperature after adding a given amount of heat
+# to water . It takes 2 inputs: the initial temperature value(integer) and heat amount(integer) as input and returns
+# the final temperature, considering melting at 0°C and a maximum of 100°C. when it is under 0 we get -100 as return value.
+
+signature: heat_water: (int, int)-> int
+
+intro: temp
+
+intro: heat
+
+destruct: temp > 100
+
+return:
+
+fill: -100
+
+destruct: temp < 0
+
+let: total: int
+
+fill: temp + heat
+
+destruct: total < 0
+
+return:
+
+fill: total
+
+destruct: total < 80
+
+return:
+
+fill: 0
+
+destruct: (total - 80) >= 100
+
+return:
+
+fill: 100
+
+return:
+
+fill: total - 80
+
+destruct: temp + heat >= 100
+
+return:
+
+fill: 100
+
+return:
+
+fill: temp + heat
+
+finish: 

@@ -1,0 +1,67 @@
+description: example which demonstrates how to use tuple type, and use destruct on tuple and range type
+
+signature: example3: (float, int, tuple[float, int], tuple[])->float
+
+intro: x
+
+intro: y
+
+intro: t
+
+intro: u
+
+comment: Example of filling this variable of type tuple with existing tuple
+
+let: my_tuple1: tuple[float, int]
+
+fill: t
+
+comment: Another example of filling this variable of type tuple with a new tuple
+
+let: my_tuple2: tuple[float, int]
+
+new: tuple[float, int]
+
+fill: x
+
+fill: y+1
+
+comment: After the following destruct command ,the program will not go to the end because we don't have return
+
+destruct: my_tuple1
+
+intro: my_float1
+
+intro: my_integer1
+
+let: my_mixed: float
+
+fill: my_float1 * my_integer1
+
+pass:
+
+comment: After the following destruct command ,the program will go automatically to the end because we have return command
+
+destruct: t
+
+intro: my_float2
+
+intro: my_integer2
+
+comment: it is not allowed to fill the return hole with my_integer1 * my_float1, because it is in a different scope
+
+destruct: range(10)
+
+intro: element
+
+let: variable: int
+
+fill: element
+
+pass:
+
+return:
+
+fill: my_float2 * my_integer2
+
+finish:

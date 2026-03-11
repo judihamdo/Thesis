@@ -1,0 +1,103 @@
+description: A complicated nested Slicing & Indexing example
+
+signature: main: (list[int], int)->list[list[int]]
+
+intro: xs
+
+intro: x
+
+let:ys:list[int]
+
+new: list[int]
+
+cons:
+
+switch: 0
+
+fill: 34
+
+cons:
+
+switch: 0
+
+fill: 35
+
+cons:
+
+switch: 0
+
+fill: 36
+
+nil:
+
+let: my_list: list[list[int]]
+
+new: list[list[int]]
+
+cons:
+
+switch: 0
+
+fill: ys[0:2]
+
+nil:
+
+let: test: int
+
+comment: 
+
+fill: my_list[0][0]
+
+let: my_list1: list[int]
+
+fill: ys[0:2]
+
+comment: assigning test_1: int = my_list1[2] would not work, it exceeds the Length of ys
+
+let: test_1: int
+
+fill: my_list1[1]
+
+comment: appending ys to test_2 would not work, it is a different type
+
+let: test_2: list[list[list[int]]]
+
+new: list[list[list[int]]]
+
+cons: 
+
+switch: 0
+
+fill: my_list
+
+nil:
+
+comment: appending ys to test_3 would not work, it is a different type
+
+let: test_3: list[list[list[list[int]]]]
+
+new: list[list[list[list[int]]]]
+
+cons: 
+
+switch: 0
+
+fill: test_2
+
+nil:
+
+comment: it is not allwoed simple_integer write test_3[0][0][0][2] because it exceeds the real length of the intended list 
+
+let: simple_integer: int
+
+fill: test_3[0][0][0][1]
+
+comment: returning test_2 instead for example, would not work, because test_2 of type list[list[list[int]]] but return_type must be list[list[int]]
+
+return:
+
+fill: my_list
+
+finish:
+
+
