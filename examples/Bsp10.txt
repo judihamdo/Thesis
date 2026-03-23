@@ -1,4 +1,4 @@
-description: .. Hier brauchen wir for r in blabla zu reparieren damit er gut funktioniert
+description: .. This function determines whether a river flows from a given location. A river may either be a Creek with a single origin or a Confluence formed by two smaller rivers. The function inspects the river structure to check whether the specified location is one of its origins.
 
 type: River = Creek | Confluence
 
