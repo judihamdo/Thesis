@@ -211,6 +211,8 @@ def _tactic_intro(interpreter, data: str) -> None:
     # Prevent collisions: the name must NOT match any existing variable.
     if identifier.value in visible:
         raise TacticError("❌ it already exists variable with this name")
+    if identifier.value in interpreter.program.variables or identifier.value in interpreter.used_variables_names:
+        raise TacticError("❌ it already exists variable with this name")
     if identifier in interpreter.program.variables or identifier in interpreter.used_variables_names:
         raise TacticError("❌ it already exists variable with this name")
     # Take the type directly from the hole.

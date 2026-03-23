@@ -362,10 +362,13 @@ def statement_to_str(statement: Statement | Hole, program, indent_level: int = 0
             # Prüfe, ob orelse nur ein einzelner Hole ist -> direkt inline ohne extra indent
             if len(orelse) == 1 and isinstance(orelse[0], Hole):
                 orelse_str = statement_to_str(orelse[0], program)
-                return f"if {pretty_expr(test)}:\n{indent(body_str)}\nelse:\n    {orelse_str}"
+                #return f"if {pretty_expr(test)}:\n{indent(body_str)}\nelse:\n    {orelse_str}"
+                return f"if {expression_to_str(test)}:\n{indent(body_str)}\nelse:\n    {orelse_str}"
             # sonst normale verschachtelte orelse
             orelse_str = "\n".join(statement_to_str(s, program) for s in orelse)
-            return f"if {pretty_expr(test)}:\n{indent(body_str)}\nelse:\n{indent(orelse_str)}"
+            #return f"if {pretty_expr(test)}:\n{indent(body_str)}\nelse:\n{indent(orelse_str)}"
+            return f"if {expression_to_str(test)}:\n{indent(body_str)}\nelse:\n{indent(orelse_str)}"
+        
         case _:
             raise UnexpectedValueError(statement)
 

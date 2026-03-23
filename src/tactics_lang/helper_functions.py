@@ -3,6 +3,7 @@ from typing import Any
 from .immutable_list import IList
 from .program import (
     CompositeStatement,
+    DescriptionStatement,
     DataDeclaration,
     EConst,
     EFunCall,
@@ -65,10 +66,42 @@ def is_within_destruct(interpreter, hole: Hole) -> bool:
 
     return search(interpreter.program.statement)
 
-
 def has_previous_stmt_in_same_block(interpreter, hole: Hole) -> bool:
-    """Checks whether there is at least one statement before this hole in the same scope.
-    The parent is the statement that directly contains the hole."""
+    #Checks whether there is at least one statement before this hole in the same scope.
+    #The parent is the statement that directly contains the hole.
+    parent = find_parent_statement(interpreter, hole)
+    # Hole is in if-body oder else-body
+    if isinstance(parent, SIf):
+        for i, s in enumerate(parent.body):
+            if s is hole:
+                return any(not isinstance(prev, DescriptionStatement) for prev in parent.body[:i])
+        for i, s in enumerate(parent.orelse):
+            if s is hole:
+                return any(not isinstance(prev, DescriptionStatement) for prev in parent.body[:i])
+        return False
+    # Hole is in match-case body
+    if isinstance(parent, SCase):
+        for i, s in enumerate(parent.body):
+            if s is hole:
+                return any(not isinstance(prev, DescriptionStatement) for prev in parent.body[:i])
+        return False
+
+    # Hole is in for-body
+    if isinstance(parent, SFor):
+        for i, s in enumerate(parent.body):
+            if s is hole:
+                return any(not isinstance(prev, DescriptionStatement) for prev in parent.body[:i])
+        return False
+
+    # Hole is in second in CompositeStatement
+    if isinstance(parent, CompositeStatement):
+        return parent.second is hole and not isinstance(parent.first, DescriptionStatement)
+    return False
+
+
+"""def has_previous_stmt_in_same_block(interpreter, hole: Hole) -> bool:
+    #Checks whether there is at least one statement before this hole in the same scope.
+    #The parent is the statement that directly contains the hole.
     parent = find_parent_statement(interpreter, hole)
     # Hole is in if-body oder else-body
     if isinstance(parent, SIf):
@@ -96,7 +129,7 @@ def has_previous_stmt_in_same_block(interpreter, hole: Hole) -> bool:
     # Hole is in second in CompositeStatement
     if isinstance(parent, CompositeStatement):
         return parent.second is hole
-    return False
+    return False"""
 
 
 def is_directly_after_total_match(interpreter, hole: Hole) -> bool:
